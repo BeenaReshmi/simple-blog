@@ -1,0 +1,38 @@
+
+<h4 class='d-flex justify-content-between mb-4'> <span>Posts </span>
+
+  <%= link_to 'New Post', new_post_path , class: 'btn btn-primary'%>
+</h4>
+<div class='card'>
+    <div class='card-body pt-5'>
+ <% @posts.each do |post| %>
+   <%= link_to edit_post_path(post), class: 'text-decoration-none' do %>
+     <div class="card mb-3">
+      <div class='card-body'%>
+        <h5 class='card-title mb-1 text-dark'style="width:50%"><%= post.title %></h5>
+        <p class='text-secondary mb-0'> <%= post.body%></p>
+        <% post.elements.each do |element| %>
+    <% if element.persisted? %>
+     <% if element.image? %>
+      <% if element.image.present? %>
+        <%= image_tag(element.image) %>
+        
+       
+        <% end %>
+       
+        <% end %>
+        <% end %>
+
+  <% end %>
+      </div>
+      <%= link_to "View Comment", post_comments_path(post),id: "view-comment", class: 'float-right'%>
+     
+      <%= link_to "Post Comment", post_comments_path(post) %>
+     </div>
+
+   <% end %>
+ <% end %>
+</div>
+</div>
+
+

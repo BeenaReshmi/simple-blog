@@ -1,0 +1,32 @@
+<h2>Comments</h2>
+<% @posts_for_comment .comments.each do |comment| %>
+<% unless comment.parent_id  %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+  
+
+  <%= link_to 'reply', new_post_comment_path(@posts_for_comment, parent_id: comment.id), remote: true, class: 'd-block' %>
+  <div id="reply-form-<%= comment.id %>"></div>
+
+
+<% end %>
+
+<% end%>
+<h2>Add a comment:</h2>
+<%= form_with model: [ @posts_for_comment, @posts_for_comment.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
