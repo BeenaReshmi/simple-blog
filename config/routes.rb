@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   scope module: 'authors' do
   	resources :posts do
   	  resources :elements
-  	  resources :comments
+  	  resources :comments 
     end
   end
   
